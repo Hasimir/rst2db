@@ -1,0 +1,126 @@
+bash-4.3$ for x in `find . | egrep .py$` ; do
+> 2to3 -w $x
+> done ;
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: No files need to be modified.
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: No changes to ./abstrys/cmd_rst2db.py
+RefactoringTool: Files that need to be modified:
+RefactoringTool: ./abstrys/cmd_rst2db.py
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: No files need to be modified.
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: Refactored ./abstrys/docutils_ext/docbook_writer.py
+--- ./abstrys/docutils_ext/docbook_writer.py	(original)
++++ ./abstrys/docutils_ext/docbook_writer.py	(refactored)
+@@ -23,7 +23,7 @@
+     """Prints an error string and optionally, the node being worked on."""
+     sys.stderr.write('\n%s: %s\n' % (__name__, text))
+     if node:
+-        sys.stderr.write(u"  %s\n" % unicode(node))
++        sys.stderr.write("  %s\n" % str(node))
+ 
+ 
+ class DocBookWriter(writers.Writer):
+@@ -242,7 +242,7 @@
+             self.next_element_id = None
+         else:
+             if len(node['ids']) > 0:
+-                attribs['{http://www.w3.org/XML/1998/namespace}id'] = unicode(node['ids'][0])
++                attribs['{http://www.w3.org/XML/1998/namespace}id'] = str(node['ids'][0])
+ 
+         self._push_element('section', attribs)
+         # TODO - Collect other attributes.
+@@ -288,11 +288,11 @@
+         attribs = {}
+         # first check to see if an {http://www.w3.org/XML/1998/namespace}id was supplied.
+         if len(node['ids']) > 0:
+-            attribs['{http://www.w3.org/XML/1998/namespace}id'] = unicode(node['ids'][0])
++            attribs['{http://www.w3.org/XML/1998/namespace}id'] = str(node['ids'][0])
+         elif len(node.parent['ids']) > 0:
+             # If the parent node has an ID, we can use that and add '.title' at
+             # the end to make a deterministic title ID.
+-            attribs['{http://www.w3.org/XML/1998/namespace}id'] = '%s.title' % unicode(node.parent['ids'][0])
++            attribs['{http://www.w3.org/XML/1998/namespace}id'] = '%s.title' % str(node.parent['ids'][0])
+         self._push_element('title', attribs)
+ 
+ 
+@@ -327,7 +327,7 @@
+     def visit_Text(self, node):
+         if self.skip_text_processing:
+             return
+-        self.tb.data(unicode(node))
++        self.tb.data(str(node))
+ 
+ 
+     def depart_Text(self, node):
+@@ -509,7 +509,7 @@
+             imagedata_attribs['fileref'] = node['uri']
+         else:
+             # unknown attribute
+-            imagedata_attribs['eek'] = unicode(node)
++            imagedata_attribs['eek'] = str(node)
+ 
+         if node.hasattr('height'):
+             pass # not in docbook
+@@ -518,7 +518,7 @@
+             pass # not in docbook
+ 
+         if node.hasattr('scale'):
+-            imagedata_attribs['scale'] = unicode(node['scale'])
++            imagedata_attribs['scale'] = str(node['scale'])
+ 
+         if node.hasattr('align'):
+             alignval = node['align']
+@@ -590,7 +590,7 @@
+         attribs = {}
+ 
+         if node.hasattr('cols'):
+-            attribs['cols'] =  unicode(node['cols'])
++            attribs['cols'] =  str(node['cols'])
+ 
+         self._push_element('tgroup', attribs)
+ 
+@@ -603,7 +603,7 @@
+         attribs = {}
+ 
+         if node.hasattr('colwidth'):
+-            attribs['colwidth'] = unicode(node['colwidth'])
++            attribs['colwidth'] = str(node['colwidth'])
+ 
+         self._push_element('colspec', attribs)
+ 
+RefactoringTool: Files that were modified:
+RefactoringTool: ./abstrys/docutils_ext/docbook_writer.py
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: No files need to be modified.
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: No changes to ./abstrys/sphinx_ext/docbook_builder.py
+RefactoringTool: Files that need to be modified:
+RefactoringTool: ./abstrys/sphinx_ext/docbook_builder.py
+RefactoringTool: Skipping implicit fixer: buffer
+RefactoringTool: Skipping implicit fixer: idioms
+RefactoringTool: Skipping implicit fixer: set_literal
+RefactoringTool: Skipping implicit fixer: ws_comma
+RefactoringTool: No changes to ./setup.py
+RefactoringTool: Files that need to be modified:
+RefactoringTool: ./setup.py
+bash-4.3$ 
